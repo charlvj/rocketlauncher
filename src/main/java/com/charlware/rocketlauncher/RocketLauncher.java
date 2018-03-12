@@ -23,8 +23,8 @@ import org.usb4java.LibUsbException;
  */
 public class RocketLauncher implements Closeable {
 
-    private RocketLauncherDevice rocketLauncherDevice;
-    private Context context;
+    private final RocketLauncherDevice rocketLauncherDevice;
+    private final Context context;
     private Device device;
     private DeviceHandle deviceHandle;
     private boolean kernelDriverAttached = false;
@@ -81,7 +81,7 @@ public class RocketLauncher implements Closeable {
 
         try {
             // Iterate over all devices and scan for the right one
-            for (Device device : list) {
+            for(Device device : list) {
                 DeviceDescriptor descriptor = new DeviceDescriptor();
                 result = LibUsb.getDeviceDescriptor(device, descriptor);
                 if (result != LibUsb.SUCCESS) {

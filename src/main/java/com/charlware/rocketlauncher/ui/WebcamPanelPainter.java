@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.charlware.rocketlauncher;
+package com.charlware.rocketlauncher.ui;
 
+import com.charlware.rocketlauncher.FaceTracker;
 import com.github.sarxos.webcam.Webcam;
 import com.github.sarxos.webcam.WebcamPanel;
 import java.awt.BasicStroke;

@@ -3,8 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.charlware.rocketlauncher;
+package com.charlware.rocketlauncher.ui;
 
+import com.charlware.rocketlauncher.Command;
+import com.charlware.rocketlauncher.FaceTracker;
+import com.charlware.rocketlauncher.RocketLauncher;
 import com.charlware.rocketlauncher.device.DreamCheeky;
 import com.github.sarxos.webcam.Webcam;
 import com.github.sarxos.webcam.WebcamPanel;
@@ -94,15 +97,12 @@ public class ControlPanel extends javax.swing.JFrame {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
             }
-            public void windowClosed(java.awt.event.WindowEvent evt) {
-                formWindowClosed(evt);
-            }
         });
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.Y_AXIS));
 
         jPanel1.setLayout(new java.awt.GridLayout(3, 3));
 
-        jButton2.setText("jButton2");
+        jButton2.setEnabled(false);
         jPanel1.add(jButton2);
 
         btUp.setText("Up");
@@ -121,7 +121,7 @@ public class ControlPanel extends javax.swing.JFrame {
         });
         jPanel1.add(btUp);
 
-        jButton5.setText("jButton5");
+        jButton5.setEnabled(false);
         jPanel1.add(jButton5);
 
         btLeft.setText("Left");
@@ -154,7 +154,7 @@ public class ControlPanel extends javax.swing.JFrame {
         });
         jPanel1.add(btRight);
 
-        jButton9.setText("jButton9");
+        jButton9.setEnabled(false);
         jPanel1.add(jButton9);
 
         btDown.setText("Down");
@@ -168,7 +168,7 @@ public class ControlPanel extends javax.swing.JFrame {
         });
         jPanel1.add(btDown);
 
-        jButton6.setText("jButton6");
+        jButton6.setEnabled(false);
         jPanel1.add(jButton6);
 
         getContentPane().add(jPanel1);
@@ -186,16 +186,6 @@ public class ControlPanel extends javax.swing.JFrame {
     private void btUpMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btUpMousePressed
         rocketLauncher.sendCommand(Command.UP);
     }//GEN-LAST:event_btUpMousePressed
-
-    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        try {
-            rocketLauncher.close();
-        } catch (IOException ex) {
-            Logger.getLogger(ControlPanel.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        setVisible(false);
-
-    }//GEN-LAST:event_formWindowClosed
 
     private void btUpMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btUpMouseReleased
         rocketLauncher.sendCommand(Command.STOP);
@@ -230,7 +220,14 @@ public class ControlPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_btFireMouseClicked
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        formWindowClosed(evt);
+        try {
+            rocketLauncher.close();
+            webcam.close();
+        } catch (IOException ex) {
+            Logger.getLogger(ControlPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        setVisible(false);
+        dispose();
     }//GEN-LAST:event_formWindowClosing
 
     /**
