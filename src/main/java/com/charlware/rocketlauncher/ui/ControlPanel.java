@@ -24,12 +24,12 @@ import java.util.logging.Logger;
  */
 public class ControlPanel extends javax.swing.JFrame {
 
-    private RocketLauncher rocketLauncher;
-    private Webcam webcam;
+    private final RocketLauncher rocketLauncher;
+    private final Webcam webcam;
     private WebcamPanel panel = null;
-    private Executor executor = Executors.newSingleThreadExecutor();
+    private final Executor executor = Executors.newSingleThreadExecutor();
     private FaceTracker faceTracker;
-    private boolean enableFaceTracker = false;
+    private boolean faceTrackerEnabled = false;
 
     /**
      * Creates new form ControlPanel
@@ -44,7 +44,7 @@ public class ControlPanel extends javax.swing.JFrame {
             System.out.println("Webcam: " + webcam.getName());
             
             faceTracker = new FaceTracker(rocketLauncher, webcam);
-            if(enableFaceTracker) {
+            if(faceTrackerEnabled) {
                 executor.execute(faceTracker);
             }
             
@@ -66,6 +66,10 @@ public class ControlPanel extends javax.swing.JFrame {
         }
         pack();
         setVisible(true);
+    }
+    
+    public void setFaceTrackerEnabled(boolean enabled) {
+        faceTrackerEnabled = enabled;
     }
     
     /**
